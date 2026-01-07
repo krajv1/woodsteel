@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wood&amp;Steel - Meble z litego drewna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dark-gray: #1a1a1a;
+            --medium-gray: #3a3a3a;
+            --light-gray: #7a7a7a;
+            --concrete: #e8e8e8;
+            --white: #f8f8f8;
+            --wood-accent: #8B7355;
+            --metal-accent: #5D5D5D;
+            --text-dark: #1A1A1A;
+            --text-light: #F0F0F0;
+            --accent: #c19a6b;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+            padding-top: 70px;
+            transition: padding-top 0.3s ease;
+        }
+
+            /* Zapobiega scrollowaniu gdy menu jest otwarte */
+            body.menu-open {
+                overflow: hidden;
+            }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--wood-accent);
+            color: var(--white);
+            padding: 14px 28px;
+            border: none;
+            border-radius: 2px;
+            text-decoration: none;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            font-size: 13px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .btn:before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: rgba(255,255,255,0.1);
+                transition: all 0.4s ease;
+            }
+
+            .btn:hover {
+                background-color: var(--accent);
+                transform: translateY(-3px);
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            }
+
+                .btn:hover:before {
+                    left: 100%;
+                }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--wood-accent);
+            color: var(--wood-accent);
+        }
+
+            .btn-outline:hover {
+                background-color: var(--wood-accent);
+                color: var(--white);
+            }
+
+        /* ==================== */
+        /* HEADER - STICKY NAVBAR Z WYSTAJĄCYM LOGO */
+        /* ==================== */
+        header {
+            background-color: rgba(26, 26, 26, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            overflow: visible; /* WAŻNE - pozwala logo wystawać */
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            width: 100%;
+            position: relative;
+        }
+
+        /* LOGO - WYSTAJĄCE, POWIĘKSZONE */
+        .logo {
+            position: relative;
+            z-index: 1002;
+        }
+
+            .logo img {
+                height: 120px; /* DUŻE LOGO - wystaje */
+                width: auto;
+                /*transition: all 0.3s ease;*/
+                display: block;
+                transform: translateY(35px); /* Wystaje 10px poza navbar */
+                filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); /* Cień dla głębi */
+            }
+
+               /* .logo img:hover {
+                    transform: translateY(10px) scale(1.05);
+                    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.4));
+                }*/
+
+        /* Desktop Menu */
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+            nav ul li {
+                margin-left: 25px;
+                position: relative;
+            }
+
+                nav ul li:after {
+                    content: '';
+                    position: absolute;
+                    bottom: -5px;
+                    left: 0;
+                    width: 0;
+                    height: 2px;
+                    background-color: var(--wood-accent);
+                    transition: width 0.3s ease;
+                }
+
+                nav ul li:hover:after {
+                    width: 100%;
+                }
+
+                nav ul li a {
+                    text-decoration: none;
+                    color: var(--white);
+                    font-weight: 500;
+                    transition: color 0.3s;
+                    text-transform: uppercase;
+                    font-size: 13px;
+                    letter-spacing: 1px;
+                }
+
+                    nav ul li a:hover {
+                        color: var(--wood-accent);
+                    }
+
+        .header-cta {
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-number {
+            color: var(--white);
+            font-weight: 600;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+        }
+
+            .phone-number i {
+                margin-right: 6px;
+                color: var(--wood-accent);
+                font-size: 14px;
+            }
+
+        /* Mobile Menu Button (domyślnie ukryty) */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 5px;
+        }
+
+        /* Mobile Menu (domyślnie ukryty) */
+        .mobile-nav {
+            display: none;
+        }
+
+        /* ==================== */
+        /* RESPONSYWNOŚĆ NAVBAR */
+        /* ==================== */
+
+        /* Tablet i mniejsze (992px i mniej) */
+        @media (max-width: 992px) {
+            .header-cta .phone-number {
+                display: none;
+            }
+
+            .header-cta .btn {
+                padding: 10px 20px;
+                font-size: 12px;
+            }
+
+            /* Logo na tablecie */
+            .logo img {
+                height: 110px; /* Mniejsze ale wciąż wystające */
+                transform: translateY(32px);
+            }
+        }
+
+        /* Mobile (768px i mniejsze) */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            header {
+                height: 60px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 1003;
+            }
+
+            /* Ukryj desktop menu */
+            nav ul {
+                display: none;
+            }
+
+            /* Pokaż i ostyluj mobile menu */
+            .mobile-nav {
+                display: block;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(26, 26, 26, 0.98);
+                backdrop-filter: blur(15px);
+                padding: 0;
+                transform: translateY(-100%);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.4s ease;
+                z-index: 999;
+                height: calc(100vh - 60px);
+                overflow-y: auto;
+            }
+
+                .mobile-nav.active {
+                    transform: translateY(0);
+                    opacity: 1;
+                    visibility: visible;
+                }
+
+                .mobile-nav ul {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    padding: 20px 0;
+                    margin: 0;
+                }
+
+                    .mobile-nav ul li {
+                        margin: 0;
+                        width: 100%;
+                        text-align: center;
+                        border-bottom: 1px solid rgba(255,255,255,0.1);
+                    }
+
+                        .mobile-nav ul li:last-child {
+                            border-bottom: none;
+                        }
+
+                        .mobile-nav ul li a {
+                            display: block;
+                            padding: 18px 20px;
+                            font-size: 16px;
+                            text-transform: uppercase;
+                            letter-spacing: 1px;
+                        }
+
+                        .mobile-nav ul li:hover a {
+                            color: var(--wood-accent);
+                            background-color: rgba(255,255,255,0.05);
+                        }
+
+            .header-cta {
+                margin-right: 50px;
+                z-index: 1002;
+            }
+
+            /* Logo na mobile */
+            .logo {
+                position: absolute;
+                left: 20px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 1002;
+            }
+
+                .logo img {
+                    height: 95px;
+                    transform: translateY(28px);
+                }
+        }
+
+        /* Bardzo małe ekrany (576px i mniejsze) */
+        @media (max-width: 576px) {
+            .header-cta .btn {
+                padding: 8px 15px;
+                font-size: 11px;
+            }
+
+            .mobile-menu-btn {
+                font-size: 1.5rem;
+            }
+
+            /* Logo na bardzo małych ekranach */
+            .logo img {
+                height: 85px;
+                transform: translateY(25px);
+            }
+        }
+
+        /* ==================== */
+        /* RESZTA STRONY */
+        /* ==================== */
+
+        /* Hero Section */
+        .hero {
+            height: calc(100vh - 70px);
+            background: linear-gradient(135deg, rgba(26,26,26,0.8) 0%, rgba(58,58,58,0.7) 100%);
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            margin-top: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 700px;
+            position: relative;
+            z-index: 2;
+        }
+
+            .hero-content h1 {
+                font-size: 4rem;
+                margin-bottom: 20px;
+                line-height: 1.1;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+                margin-bottom: 40px;
+                opacity: 0.9;
+            }
+
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+
+        .hero-features {
+            display: flex;
+            margin-top: 40px;
+            gap: 25px;
+        }
+
+        .hero-feature {
+            display: flex;
+            align-items: center;
+        }
+
+            .hero-feature i {
+                font-size: 20px;
+                color: var(--wood-accent);
+                margin-right: 12px;
+            }
+
+        /* Sections */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+            .section-title h2 {
+                font-size: 2.5rem;
+                color: var(--dark-gray);
+                margin-bottom: 20px;
+                position: relative;
+                display: inline-block;
+            }
+
+                .section-title h2:after {
+                    content: '';
+                    position: absolute;
+                    bottom: -15px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    width: 80px;
+                    height: 3px;
+                    background-color: var(--wood-accent);
+                }
+
+            .section-title p {
+                max-width: 700px;
+                margin: 30px auto 0;
+                font-size: 1.1rem;
+                color: var(--light-gray);
+            }
+
+        /* About Section */
+        .about {
+            background-color: var(--white);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .about-content p {
+            margin-bottom: 20px;
+            color: var(--light-gray);
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 35px;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 25px 15px;
+            background: var(--white);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--wood-accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-text {
+            font-size: 0.95rem;
+            color: var(--light-gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-image {
+            position: relative;
+            height: 450px;
+            background: var(--concrete);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Products Section */
+        .products {
+            background-color: var(--concrete);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 35px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.4s, box-shadow 0.4s;
+            position: relative;
+        }
+
+            .product-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            }
+
+        .product-image {
+            height: 220px;
+            background: var(--medium-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--wood-accent);
+            color: var(--white);
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-info {
+            padding: 25px;
+        }
+
+            .product-info h3 {
+                font-size: 1.4rem;
+                margin-bottom: 12px;
+                color: var(--dark-gray);
+            }
+
+            .product-info p {
+                margin-bottom: 18px;
+                color: var(--light-gray);
+            }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--wood-accent);
+            margin-bottom: 18px;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 22px;
+        }
+
+            .product-features li {
+                margin-bottom: 7px;
+                display: flex;
+                align-items: center;
+            }
+
+                .product-features li i {
+                    color: var(--wood-accent);
+                    margin-right: 8px;
+                    font-size: 0.85rem;
+                }
+
+        /* Process Section */
+        .process {
+            background-color: var(--white);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 35px;
+            margin-top: 50px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 35px 25px;
+            background: var(--white);
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+            .process-step:hover {
+                transform: translateY(-10px);
+            }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--wood-accent);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .process-step h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--dark-gray);
+        }
+
+        .process-step p {
+            color: var(--light-gray);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            background: linear-gradient(135deg, var(--dark-gray) 0%, var(--medium-gray) 100%);
+            color: var(--white);
+        }
+
+            .testimonials .section-title h2 {
+                color: var(--white);
+            }
+
+            .testimonials .section-title p {
+                color: rgba(255,255,255,0.7);
+            }
+
+        .testimonials-slider {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 5px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--wood-accent);
+            margin-right: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--wood-accent) 0%, var(--accent) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 80px 0;
+        }
+
+            .cta h2 {
+                font-size: 2.5rem;
+                margin-bottom: 20px;
+            }
+
+            .cta p {
+                font-size: 1.1rem;
+                max-width: 700px;
+                margin: 0 auto 35px;
+                opacity: 0.9;
+            }
+
+            .cta .btn {
+                background: var(--dark-gray);
+                color: var(--white);
+            }
+
+                .cta .btn:hover {
+                    background: var(--white);
+                    color: var(--dark-gray);
+                }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+        }
+
+        .contact-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .contact-info p {
+            margin-bottom: 35px;
+            color: var(--light-gray);
+        }
+
+        .contact-details {
+            margin-bottom: 35px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+            .contact-detail i {
+                width: 45px;
+                height: 45px;
+                background: var(--wood-accent);
+                color: var(--white);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-right: 15px;
+                font-size: 1.1rem;
+            }
+
+            .contact-detail h4 {
+                font-size: 1.1rem;
+                margin-bottom: 5px;
+            }
+
+            .contact-detail p {
+                margin: 0;
+                color: var(--light-gray);
+            }
+
+        .contact-form {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 5px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+            .form-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 600;
+                color: var(--dark-gray);
+            }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            background: var(--white);
+            font-size: 15px;
+            transition: border 0.3s;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+            .form-control:focus {
+                outline: none;
+                border-color: var(--wood-accent);
+            }
+
+        textarea.form-control {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+
+            .form-row .form-group {
+                flex: 1;
+            }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-gray);
+            color: var(--white);
+            padding: 70px 0 25px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 45px;
+            margin-bottom: 50px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            color: var(--wood-accent);
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+            .footer-column h3:after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 35px;
+                height: 2px;
+                background-color: var(--wood-accent);
+            }
+
+        .footer-column p {
+            margin-bottom: 18px;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+            .footer-column ul li {
+                margin-bottom: 10px;
+            }
+
+        .footer-column a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+            .footer-column a:hover {
+                color: var(--wood-accent);
+            }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+            .social-links a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 38px;
+                height: 38px;
+                background: rgba(255,255,255,0.1);
+                color: var(--white);
+                border-radius: 3px;
+                transition: all 0.3s;
+            }
+
+                .social-links a:hover {
+                    background: var(--wood-accent);
+                    transform: translateY(-3px);
+                }
+
+        .copyright {
+            text-align: center;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+
+        /* ==================== */
+        /* RESPONSYWNOŚĆ RESZTY STRONY */
+        /* ==================== */
+        @media (max-width: 1200px) {
+            .hero-content h1 {
+                font-size: 3.2rem;
+            }
+
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 45px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .hero-features {
+                flex-direction: column;
+                gap: 18px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .contact-form {
+                padding: 25px 15px;
+            }
+
+            section {
+                padding: 70px 0;
+            }
+
+            .hero {
+                height: calc(100vh - 60px);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title h2 {
+                font-size: 1.7rem;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ==================== */
+        /* POPRAWA AMPERSANDA (&) */
+        /* ==================== */
+        .amp-fix {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-weight: 400;
+            letter-spacing: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <a href="#home">
+                    <!-- LOKALNY PLIK logo.png - POWIĘKSZONE I WYSTAJĄCE -->
+                    <img src="assets/logo.png" alt="Wood&amp;Steel - Meble z litego drewna">
+                </a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <nav>
+                <ul>
+                    <li><a href="#home">Strona Główna</a></li>
+                    <li><a href="#about">O Nas</a></li>
+                    <li><a href="#products">Produkty</a></li>
+                    <li><a href="#process">Proces</a></li>
+                    <li><a href="#testimonials">Opinie</a></li>
+                    <li><a href="#contact">Kontakt</a></li>
+                </ul>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <div class="header-cta">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i> +48 695 137 448
+                </div>
+                <a href="#contact" class="btn">Zapytaj o Wycenę</a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-nav">
+            <ul>
+                <li><a href="#home">Strona Główna</a></li>
+                <li><a href="#about">O Nas</a></li>
+                <li><a href="#products">Produkty</a></li>
+                <li><a href="#process">Proces</a></li>
+                <li><a href="#testimonials">Opinie</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Reszta strony BEZ ZMIAN -->
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Meble z litego drewna</h1>
+                <p>Tworzymy unikalne, ręcznie robione meble łączące loftowy design z najwyższą jakością materiałów. Każdy projekt jest dopasowany do Twoich potrzeb i przestrzeni.</p>
+                <div class="hero-btns">
+                    <a href="#products" class="btn">Zobacz Kolekcję</a>
+                    <a href="#contact" class="btn btn-outline">Skonsultuj Projekt</a>
+                </div>
+                <div class="hero-features">
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Wasze info, np gwarancja</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Wasze info</span>
+                    </div>
+                    <div class="hero-feature">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Wasze info, np czas realizacji</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Dlaczego Wood<span class="amp-fix">&</span>Steel ?</h2>
+                <p>
+                   Od 2023 roku z pasji i precyzji tworzymy unikalne meble z litego dębu na wymiar – z pełną kontrolą nad każdym detalem, rozbudowanym warsztatem i zaangażowaniem widać w każdym calu drewna.
+
+                </p>
+            </div>
+            <div class="about-container">
+                <div class="about-content">
+                    <h3>Rzemieślnicza Jakość</h3>
+                    <p>Wood&Steel to mała stolarnia założona w 2023 roku przez dwoje pasjonatów. Specjalizujemy się w ręcznym tworzeniu mebli z litego dębu na indywidualne zamówienie, z pełną kontrolą nad każdym etapem – od projektu po wykończenie.</p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">X</div>
+                            <div class="stat-text">Zrealizowanych Projektów</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">X</div>
+                            <div class="stat-text">Zadowolonych Klientów</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    NASZA PRACOWNIA // Zdjęcie jak chcecie
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nasze Produkty</h2>
+                <p>Oferujemy szeroki wybór mebli w stylu loftowym, które możesz dostosować do swoich potrzeb</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        STOŁY
+                        <div class="product-badge">Bestseller</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Stoły Industrialne</h3>
+                        <p>Solidne stoły jadalniane w różnych rozmiarach i konfiguracjach.</p>
+                        <div class="product-price">od x zł</div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                        </ul>
+                        <a href="#contact" class="btn">Zapytaj o Wycenę</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        STOLIKI KAWOWE
+                    </div>
+                    <div class="product-info">
+                        <h3>Stoliki Kawowe</h3>
+                        <p>Eleganckie stoliki do salonu z metalowymi akcentami w stylu loftowym.</p>
+                        <div class="product-price">od x zł</div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Wasza notatka</li>
+                            <li><i class="fas fa-check"></i> Wasza notatka</li>
+                            <li><i class="fas fa-check"></i> Wasza notatka</li>
+                            <li><i class="fas fa-check"></i> Wasza notatka</li>
+                        </ul>
+                        <a href="#contact" class="btn">Zapytaj o Wycenę</a>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        SZAFKI RTV
+                    </div>
+                    <div class="product-info">
+                        <h3>Szafki RTV</h3>
+                        <p>Funkcjonalne szafki na sprzęt audio-video w stylu industrialnym.</p>
+                        <div class="product-price">od x zł</div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                            <li><i class="fas fa-check"></i> Wasza notatka </li>
+                        </ul>
+                        <a href="#contact" class="btn">Zapytaj o Wycenę</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="process">
+        <div class="container">
+            <div class="section-title">
+                <h2>Jak Działamy?</h2>
+                <p>Proces tworzenia mebli na wymiar krok po kroku</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Konsultacja</h3>
+                    <p>Rozmowa, potrzeby, doradztwo, materiały, idealne dopasowanie</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Projekt</h3>
+                    <p>Twój szkic, nasze dostosowanie, detale, funkcjonalność, realizacja wyobrażeń</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Produkcja</h3>
+                    <p>Ręczna obróbka drewna, precyzja, kontrola jakości, wykończenie, gotowy mebel</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Dostawa i Montaż</h3>
+                    <p>Transport, dostawa pod adres, montaż, prezentacja, satysfakcja klienta</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Opinie Klientów</h2>
+                <p>Co mówią o nas nasi klienci</p>
+            </div>
+            <div class="testimonials-slider">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Zajebiste meble! // dla żartu jak coś haha"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EK</div>
+                        <div class="author-info">
+                            <h4>Emil Krajka</h4>
+                            <p>Honolulu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Gotowy na Zmianę?</h2>
+            <p>Skontaktuj się z nami już dziś, aby omówić swój wymarzony mebel w stylu industrialnym.</p>
+            <a href="#contact" class="btn">Umów Konsultację</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontakt</h2>
+                <p>Skontaktuj się z nami, aby omówić swój projekt</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Umów się na bezpłatną konsultację</h3>
+                    <p>Jesteśmy do Twojej dyspozycji od poniedziałku do piątku w godzinach ??? / Wasza decyzja. Odpowiadamy na wszystkie zapytania w ciągu 24 godzin.</p>
+
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Adres</h4>
+                                <p>ul. Gębice 22, 63 - 830 Pępowo</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Telefon</h4>
+                                <p>+48 695 137 448</p>
+                            </div>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>woodsteel@wp.pl</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <form id="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Imię i nazwisko *</label>
+                                <input type="text" id="name" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Telefon</label>
+                                <input type="tel" id="phone" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Temat</label>
+                                <select id="subject" class="form-control">
+                                    <option value="">Wybierz temat</option>
+                                    <option value="stoly">Stoły</option>
+                                    <option value="stoliki">Stoliki kawowe</option>
+                                    <option value="szafki">Szafki RTV</option>
+                                    <option value="inne">Inne meble</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Wiadomość *</label>
+                            <textarea id="message" class="form-control" placeholder="Opisz swój projekt, podaj wymiary, preferowane materiały..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn">Wyślij zapytanie</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Wood<span class="amp-fix">&</span>Steel</h3>
+                    <p>Tworzymy unikalne meble z drewna w stylu loftowym, łącząc industrialny design z najwyższą jakością wykonania.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Produkty</h3>
+                    <ul>
+                        <li><a href="#products">Stoły</a></li>
+                        <li><a href="#products">Stoliki kawowe</a></li>
+                        <li><a href="#products">Szafki RTV</a></li>
+                        <li><a href="#products">Szafki nocne</a></li>
+                        <li><a href="#products">Komody</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Firma</h3>
+                    <ul>
+                        <li><a href="#about">O nas</a></li>
+                        <li><a href="#process">Proces</a></li>
+                        <li><a href="#testimonials">Opinie</a></li>
+                        <li><a href="#contact">Kontakt</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Kontakt</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Gębice 22, 63-830 Pępowo</li>
+                        <li><i class="fas fa-phone"></i> +48 695 137 448 </li>
+                        <li><i class="fas fa-envelope"></i> woodsteel@wp.pl </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; Wood<span class="amp-fix">&</span>Steel. Wszelkie prawa zastrzeżone.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile menu
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileNav = document.querySelector('.mobile-nav');
+            const body = document.body;
+
+            mobileMenuBtn.addEventListener('click', function (e) {
+                e.stopPropagation();
+                mobileNav.classList.toggle('active');
+                body.classList.toggle('menu-open');
+                mobileMenuBtn.innerHTML = mobileNav.classList.contains('active')
+                    ? '<i class="fas fa-times"></i>'
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            // Zamknij menu po kliknięciu poza nim
+            document.addEventListener('click', function (e) {
+                if (!mobileNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    mobileNav.classList.remove('active');
+                    body.classList.remove('menu-open');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+
+            // Zamknij menu po kliknięciu w link
+            const allNavLinks = document.querySelectorAll('nav a, .mobile-nav a, .header-cta a');
+            allNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('active');
+                    body.classList.remove('menu-open');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+
+            // Smooth scrolling dla wszystkich linków nawigacyjnych
+            allNavLinks.forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetSection = document.querySelector(targetId);
+                    if (!targetSection) return;
+
+                    // Dynamicznie oblicz wysokość navbaru
+                    const headerHeight = document.querySelector('header').offsetHeight;
+
+                    window.scrollTo({
+                        top: targetSection.offsetTop - headerHeight,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Form submission
+            // Form submission z wysyłką do backendu
+            const forms = document.querySelectorAll('form');
+            forms.forEach(form => {
+                form.addEventListener('submit', async function (e) {
+                    e.preventDefault();
+
+                    // Walidacja
+                    const requiredFields = this.querySelectorAll('[required]');
+                    let isValid = true;
+
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.style.borderColor = 'red';
+                        } else {
+                            field.style.borderColor = '#ddd';
+                        }
+                    });
+
+                    if (!isValid) {
+                        alert('Proszę wypełnić wszystkie wymagane pola oznaczone *');
+                        return;
+                    }
+
+                    // Pobranie wartości
+                    const data = {
+                        name: this.querySelector('#name').value,
+                        email: this.querySelector('#email').value,
+                        phone: this.querySelector('#phone').value,
+                        subject: this.querySelector('#subject').value,
+                        message: this.querySelector('#message').value
+                    };
+
+                    try {
+                        const response = await fetch('/api/contact', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+
+                        if (response.ok) {
+                            alert('Dziękujemy za wiadomość! Skontaktujemy się z Tobą w ciągu 24 godzin.');
+                            this.reset();
+                        } else {
+                            alert('Wystąpił błąd przy wysyłaniu formularza. Spróbuj ponownie.');
+                        }
+                    } catch (err) {
+                        console.error(err);
+                        alert('Nie udało się wysłać wiadomości. Spróbuj później.');
+                    }
+                });
+            });
+
+
+            // Header scroll effect
+            window.addEventListener('scroll', function () {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.backgroundColor = 'rgba(26, 26, 26, 0.98)';
+                    header.style.padding = '8px 0';
+                } else {
+                    header.style.backgroundColor = 'rgba(26, 26, 26, 0.95)';
+                    header.style.padding = '12px 0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
